@@ -159,7 +159,6 @@
               </el-menu-item>
             </el-submenu>
           </el-submenu>
-         
         </el-menu>
       </el-aside>
       <el-main>Main</el-main>
@@ -169,7 +168,17 @@
 
 <script>
 export default {
-  name: "index"
+  name: "index",
+
+  
+  methods: {
+      open(){
+
+      },
+    close(){
+
+    },
+  },
 };
 </script>
 
