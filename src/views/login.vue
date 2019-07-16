@@ -28,6 +28,10 @@
 </template>
 
 <script>
+
+// 导入http接口
+
+
 export default {
   name: "login",
   data() {
@@ -50,11 +54,15 @@ export default {
     };
   },
   methods: {
+    // 获取饿了么ul的 form表单，饿了么ul提供验证方法
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
+        // valid有值，说明验证通过
         if (valid) {
+
           alert("submit!");
         } else {
+          //验证失败啦
           console.log("error submit!!");
           return false;
         }
