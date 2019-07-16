@@ -10,17 +10,17 @@
         ref="ruleForm"
         label-width="100px"
         class="demo-ruleForm"
-        label-position='top'
+        label-position="top"
       >
-        <el-form-item label="用户名" prop="pass">
-          <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+        <el-form-item label="用户名" prop="username">
+          <el-input type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="pass">
-          <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+        <el-form-item label="密码" prop="password">
+          <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" class="my-btn"  @click="submitForm('ruleForm')">登陆</el-button>
+          <el-button type="primary" class="my-btn" @click="submitForm('ruleForm')">登陆</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -29,78 +29,42 @@
 
 <script>
 export default {
-    name:'login',
-    data() {
-      var checkAge = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('年龄不能为空'));
-        }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('请输入数字值'));
-          } else {
-            if (value < 18) {
-              callback(new Error('必须年满18岁'));
-            } else {
-              callback();
-            }
-          }
-        }, 1000);
-      };
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else {
-          if (this.ruleForm.checkPass !== '') {
-            this.$refs.ruleForm.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.ruleForm.pass) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
-          callback();
-        }
-      };
-      return {
-        ruleForm: {
-          pass: '',
-          checkPass: '',
-          age: ''
-        },
-        rules: {
-          pass: [
-            { validator: validatePass, trigger: 'blur' }
-          ],
-          checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
-          ],
-          age: [
-            { validator: checkAge, trigger: 'blur' }
-          ]
-        }
-      };
-    },
-    methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
+  name: "login",
+  data() {
+    return {
+      //  表单元素绑定
+      ruleForm: {
+        //用户名
+        username: "",
+        //密码
+        password: ""
       },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
+      // 验证规则
+      rules: {
+        username: [
+          { required: true, message: "用户名字不能为空", trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "密码不能为空", trigger: "blur" }]
       }
+    };
+  },
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
     }
   }
+};
 </script>
 
 <style lang='less' scoped>
@@ -114,18 +78,18 @@ export default {
   // 内容竖直方向 对齐方式
   align-items: center;
 
-.for-cantainer{
+  .for-cantainer {
     width: 580px;
     height: 437px;
     background-color: #f3f3f3;
     padding: 60px 40px;
-    .my-btn{
-        width: 100%;
-        margin-top: 20px;
+    .my-btn {
+      width: 100%;
+      margin-top: 20px;
     }
-}
-.login-title{
+  }
+  .login-title {
     margin-bottom: 30px;
-}
+  }
 }
 </style>
