@@ -17,7 +17,24 @@ const router=new VueRouter({
 })
 
 // 全局前置守卫
+router.beforeEach ((to, from , next) =>{
+ // 去首页判断是否登陆
+  if (to.path.indexOf('/index')==0) {
+    // 根据地址判断
+    if(window.localStorage.getItem('token')!=undefined){
 
+      next()
+    }else{
+
+      new Vue().$message.error('欢迎下次再来')
+      // 不存在
+      router.push('/login')
+      }
+  } else {
+    // 放过去
+    next()
+  }
+})
 
 // 暴露出去
 export default router
