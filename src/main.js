@@ -15,18 +15,8 @@ Vue.use(VueRouter)
 // 导入全局样式
 import './assets/base.less'
 
-// 导入组件
-import index from './views/index.vue'
-import login from './views/login.vue'
-
-const routes=[
-  {path:'/index',component:index},
-  {path:'/login',component:login},
-]
-
-const router=new VueRouter({
-  routes
-})
+// 导入router
+import router from './router/router'
 
 new Vue({
   render: h => h(App),
