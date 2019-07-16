@@ -1,0 +1,38 @@
+body,
+html {
+  height: 100%;
+}
+body div,
+html div,
+body a,
+html a,
+body ul,
+html ul,
+body ol,
+html ol,
+body h1,
+html h1,
+body h2,
+html h2,
+body h3,
+html h3,
+body h4,
+html h4,
+body h5,
+html h5,
+body h6,
+html h6,
+body p,
+html p,
+body img,
+html img,
+body body,
+html body,
+body html,
+html html {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
