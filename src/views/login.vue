@@ -67,7 +67,10 @@ export default {
               // 提示
           this.$message.success(backData.data.meta.msg);
               //跳转 
-              this.$router.push('/index')
+              // this.$router.push('/index')
+
+              // 保存token
+              window.localStorage.setItem('token',backData.data.data.token)
             }else if(backData.data.meta.status==400){
           this.$message.error(backData.data.meta.msg);
             }
