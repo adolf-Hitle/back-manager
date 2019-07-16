@@ -16,5 +16,8 @@ const router=new VueRouter({
   routes
 })
 
+// 全局前置守卫
+
+
 // 暴露出去
 export default router

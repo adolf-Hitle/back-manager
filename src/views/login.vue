@@ -28,9 +28,8 @@
 </template>
 
 <script>
-
 // 导入http接口
-
+import { login } from "../api/http";
 
 export default {
   name: "login",
@@ -48,8 +47,7 @@ export default {
         username: [
           { required: true, message: "用户名字不能为空", trigger: "blur" }
         ],
-        password: [
-          { required: true, message: "密码不能为空", trigger: "blur" }]
+        password: [{ required: true, message: "密码不能为空", trigger: "blur" }]
       }
     };
   },
@@ -59,11 +57,24 @@ export default {
       this.$refs[formName].validate(valid => {
         // valid有值，说明验证通过
         if (valid) {
-
-          alert("submit!");
+          //提交数据
+          login({
+            username: this.ruleForm.username,
+            password: this.ruleForm.password
+          }).then(backData => {
+            // console.log(backData);
+            if(backData.data.meta.status==200){
+              // 提示
+          this.$message.success(backData.data.meta.msg);
+              //跳转 
+              this.$router.push('/index')
+            }else if(backData.data.meta.status==400){
+          this.$message.error(backData.data.meta.msg);
+            }
+          });
         } else {
           //验证失败啦
-          console.log("error submit!!");
+          this.$message.error("登陆账号或密码错误～～～");
           return false;
         }
       });
