@@ -11,7 +11,7 @@
           <h3 class="my-title">后台管理系统</h3>
         </el-col>
         <el-col :span="1">
-          <a href="#" class="logout">退出</a>
+          <a href="#" class="logout" @click.prevent="logout">退出</a>
         </el-col>
       </el-row>
     </el-header>
@@ -178,6 +178,25 @@ export default {
     close(){
 
     },
+
+    // 提示用户，是否退出？
+          logout() {
+        this.$confirm('你将退出网站, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          // 确认
+          window.localStorage.removeItem('token')
+          this.$router.push('/login')
+          this.$message({
+            type: 'success',
+            message: '退出成功!'
+          });
+        }).catch(() => {
+          this.$message('爱你么么哒～～～');          
+        });
+      }
   },
 };
 </script>
